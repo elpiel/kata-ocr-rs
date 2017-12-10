@@ -28,12 +28,15 @@ fn main() {
 
         for (char_nr, char) in line.chars().enumerate() {
             if char_nr % 3 == 0 {
-                match result.get(number_position) {
-                    Some(_) => {},
-                    None => result.insert(number_position, 0)
+                if result.get(number_position).is_none() {
+                    // first insert a zero on that *index*
+                    result.insert(number_position, 0);
                 }
+                
+                // then add +1 to the position to have the number, not the index
                 number_position += 1;
             }
+            // skip empty spaces
             if char == ' ' {
                 continue;
             }
